@@ -5,3 +5,5 @@
 2. Project-01 - Studied how nodes helps us to build web servers using built-in modules like http and external package url, also learned about URL, HTTP and it's method and responses. Also deep dived in Express JS.
 
 3. mongoose-02 - Used Express and MongoDB(as a non-relational database) for performing CRUD operations. Also, studied and practiced ODM(Object Document Mapper) namely Mongoose for performing database queries on an express app.
+
+4. mongoose-03 - Learned different Mongoose model methods and use to make REST APi's  
