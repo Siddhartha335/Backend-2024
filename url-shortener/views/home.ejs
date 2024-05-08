@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+    <style>
+      .container {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+        /* background-color: red; */
+        height: 300px;
+      }
+      .form {
+        /* background-color: antiquewhite; */
+        padding: 40px;
+        width: 500px;
+      }
+      .form input[type="submit"] {
+        margin-top: 10%;
+        margin-left: 40%;
+        padding: 10px;
+      }
+      .form input[type="text"] {
+        width: 300px;
+        height: 18px;
+      }
+      .label {
+        font-size: 18px;
+        width: 100%;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h1>URL Shortener</h1>
+      </div>
+      <% if (locals.id) { %>
+      <p>URL Generated:https://localhost/url/<%= id %></p>
+      <%} %>
+      <div class="form">
+        <form method="post" action="/url">
+          <div class="label">
+            <label for="url">Enter your original URL:</label>
+            <input
+              type="text"
+              name="url"
+              id="url"
+              placeholder="https://example.com"
+            />
+          </div>
+          <br />
+          <input type="submit" value="Generate" />
+        </form>
+      </div>
+    </div>
+    <center>
+      <div>
+        <% if(locals.urls) { %>
+            <table>
+                <tr>
+                  <th>ShortID</th>
+                  <th>Redirect URL</th>
+                  <th>TotalClicks</th>
+                </tr>
+                <% urls.map((url)=> { %>
+                <tr>
+                  <td><%= url.s hortID %></td>
+                  <td><%= url.redirectURL %></td>
+                  <td><%= url.totalClicks.length %></td>
+                </tr>
+                <%}) %>
+              </table>
+        <%} %>
+      </div>
+    </center>
+  </body>
+</html>
