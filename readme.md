@@ -10,3 +10,4 @@
 
 5. url-shortener - Created a url-shortener using Express,Mongoose model method and rendered in server-side using EJS template engine.
 
+6. Bitly-project - Created a url-shortener using Express,Mongoose model method with Authentication and Authorization.
