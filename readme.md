@@ -14,3 +14,5 @@
 
 7. Multer - Learned how to send files into server via external module called multer and saved them into static folder(public) to render them correctly.
 
+8. Blogging-app - Build the blogging application using all the concepts learned above, and deployed to AWS ElasticBeanstalk
+
