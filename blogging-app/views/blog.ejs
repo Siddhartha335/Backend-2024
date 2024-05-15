@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Blog Page</title>
+    <%- include("./partials/head") %>
+</head>
+<body>
+
+    <%- include("./partials/nav") %>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="card-title mb-3"><%= blog.title %></h3>
+                <img src="<%= blog.coverImageURL %>" class="mb-3 img-fluid" width="500px" alt="random">
+                <pre class="card-text"><%= blog.body %></pre>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <img src="<%= blog.createdBy.profileImageURL %>" class="mb-3 rounded" width="50px" alt="random"> Written By: <%= blog.createdBy.fullName %>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <h4>Comments (<%= comments.length  %> )</h4>
+            <% if (locals.user) { %>
+                <form action="/blog/comment/<%= blog._id %> " method="post">
+                    <div class="mb-3">
+                      <input type="text" class="form-control" id="content" aria-describedby="emailHelp" name="content" placeholder="Enter your comment">
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary mb-3">Comment</button>
+                </form>
+                <% } %>
+                    <% comments.forEach(comment => { %>
+                        <div class="col-12">
+                            <img src="<%= comment.createdBy.profileImageURL %>" class="mb-3 rounded" width="50px" alt="random"> <%= comment.createdBy.fullName %>
+                        </div>
+                        <pre> <%= comment.content %> </pre>
+                    <% }); %>
+        </div>
+
+    </div>
+
+
+    <%- include("./partials/scripts") %>
+</body>
+</html>

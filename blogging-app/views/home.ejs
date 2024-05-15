@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Homepage</title>
+    <%- include("./partials/head") %>
+  </head>
+  <%- include("./partials/bodyCss") %> 
+  <body>
+    <%- include("./partials/nav") %> 
+
+    <div class="container-fluid mt-3">
+      <!-- Non-Flex for Screens Larger than Small -->
+      <h3 class=" text-end mb-4">Most Featured Blogs in Our Site</h3>
+      <div
+        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4"
+      >
+        <% blogs.forEach(blog => { %>
+        <div class="col mb-4 mx-auto">
+          <div class="card h-100">
+            <img
+              src="<%= blog.coverImageURL %>"
+              class="card-img-top"
+              alt="random"
+            />
+            <div class="card-body">
+              <h5 class="card-title"><%= blog.title %></h5>
+              <a href="/blog/<%= blog._id %>" class="btn btn-outline-primary"
+                >View</a
+              >
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+ <%- include("./partials/scripts") %>
+  </body>
+</html>
