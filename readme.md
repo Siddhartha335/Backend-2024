@@ -16,3 +16,4 @@
 
 8. Blogging-app - Build the blogging application using all the concepts learned above, and deployed to AWS ElasticBeanstalk
 
+9. Chat-app - Build the chat application using web sockets protocol, having a real-time communication exists.
