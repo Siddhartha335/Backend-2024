@@ -1,0 +1,20 @@
+{
+  "name": "node-sql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon ."
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "mysql2": "^3.11.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/mysql": "^2.15.26",
+    "@types/node": "^22.5.4",
+    "nodemon": "^3.1.4"
+  }
+}
