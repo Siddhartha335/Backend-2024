@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
 import connection from "../models/index.js"
 
-const User = connection.define('User',{
+const userModel = connection.define('users',{
     id:{
         type:DataTypes.INTEGER,
         primaryKey:true,
@@ -17,3 +17,5 @@ const User = connection.define('User',{
         allowNull:false
     },
 })
+
+export default userModel;
