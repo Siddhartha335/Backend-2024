@@ -1,10 +1,6 @@
-import express from "express"
-import connection from "../models/index.js"
 import userModel from "../models/userModel.js";
 
-const router = express.Router();
-
-router.post("/add",async(req,res)=> {
+const addUser = async(req,res)=> {
     const {username,location} = req.body;
     // connection.query(`Insert into users(username,location) values(?,?)`,[username,location], (err,results,fields) => { //prepared statement
     //     if(err) {
@@ -23,10 +19,9 @@ router.post("/add",async(req,res)=> {
     catch(err) {
         console.log(err)
     }
-})
+}
 
-
-router.get('/',async(req,res)=> {
+const getAllUser = async(req,res)=> {
     // connection.query(`select * from users`,(err,results,fields)=> {
     //     if(err) throw err;
     //     if(results) {
@@ -35,9 +30,9 @@ router.get('/',async(req,res)=> {
     // })
     const allUsers = await userModel.findAll();
     res.status(200).json([...allUsers])
-})
+}
 
-router.get('/:id',async(req,res)=> {
+const getSpecificUser = async(req,res)=> {
     const id = req.params.id;
     // if(id) {
     //     connection.query(`select * from users where id=${id}`,(err,results,fields)=> {
@@ -51,9 +46,10 @@ router.get('/:id',async(req,res)=> {
     // }
     const specificUser = await userModel.findByPk(id);
     res.status(200).json(specificUser)
-})
+}
 
-router.put('/update/:id',async(req,res)=> {
+
+const updateUser = async(req,res)=> {
     const id = req.params.id;
     const {location} = req.body;
     // connection.query(`update users set location="${location}" where id=${id}`,(err,results,fields) => {
@@ -69,9 +65,9 @@ router.put('/update/:id',async(req,res)=> {
     } else {
     res.status(201).json({success:false,message:`Can't changed`})
     }
-})
+}
 
-router.delete('/delete/:id',async(req,res)=> {
+const deleteUser = async(req,res)=> {
     const id = req.params.id;
     // connection.query(`delete from users where id=${id}`,(err,results,fields) => {
     //     if(err) throw err
@@ -87,6 +83,6 @@ router.delete('/delete/:id',async(req,res)=> {
         res.status(201).json({success:false,message:`Can't delete!`})
     }
 
-})
+}
 
-export default router;
+export {addUser,getAllUser,getSpecificUser,updateUser,deleteUser}
