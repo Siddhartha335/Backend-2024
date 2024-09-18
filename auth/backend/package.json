@@ -1,0 +1,21 @@
+{
+  "name": "auth",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Sid",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon --env-file=.env ."
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.5.5",
+    "nodemon": "^3.1.4"
+  }
+}
