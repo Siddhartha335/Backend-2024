@@ -1,0 +1,24 @@
+{
+  "name": "thread-app-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Sid",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon build/index.js",
+    "dev": "tsc-watch --onSuccess \"npm start \" "
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/typescript": "^2.0.0",
+    "nodemon": "^3.1.7",
+    "tsc-watch": "^6.2.0",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.11.0",
+    "express": "^4.21.1",
+    "graphql": "^16.9.0"
+  }
+}
