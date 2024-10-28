@@ -4,7 +4,7 @@ import { expressMiddleware } from '@apollo/server/express4';
 
 const init = async() => {
     const app = express();
-    const PORT:number = 8000;
+    const PORT:number = Number(process.env.PORT) || 8000;
 
     app.use(express.json())
 
@@ -12,12 +12,14 @@ const init = async() => {
         typeDefs:`
             type Query {
                 hello:String
+                sayMyName(name:String):String
             }
 
         `,
         resolvers:{
             Query:{
-                hello: () => 'Hello I am a graphql server'
+                hello: ():string => 'Hello I am a graphql server',
+                sayMyName:(parent,{name}:{name:string}):string => `My name is ${name}`
             }
         }
     })
