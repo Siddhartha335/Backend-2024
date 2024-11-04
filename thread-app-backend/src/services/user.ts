@@ -42,6 +42,14 @@ class UserService {
         })
     }
     
+    public static getUserById(id:string) {
+        return prisma.user.findUnique({
+            where: {
+                id
+            }
+        })
+    }
+
     public static async getUserToken(payload:GetUserTokenPayload) {
         const {email,password} = payload
         const user = await UserService.getUserByEmail(email);
@@ -60,6 +68,10 @@ class UserService {
 
         return token
 
+    }
+
+    public static decodeToken(token:string) {
+        return JWT.verify(token,process.env.JWT_SECRET!)
     }
 
 }
