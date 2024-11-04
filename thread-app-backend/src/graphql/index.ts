@@ -1,13 +1,13 @@
 import { ApolloServer } from "@apollo/server"
-import prisma from "../lib/db.js"
 import {User} from "./user/index.js"
 
 const createApolloServer = async() => {
 
     const gqlServer = new ApolloServer({
         typeDefs:`
+            ${User.typeDefs}
             type Query {
-                hello: String
+                ${User.queries},
             }
             type Mutation {
                 ${User.mutations}
@@ -15,7 +15,10 @@ const createApolloServer = async() => {
         `,
         resolvers:{
             Query:{
-                ...User.resolvers.queries
+                ...User.resolvers.queries,
+                // getContext:(_:any,__:any,context) => {
+                //     console.log(context)
+                // }
             },
             Mutation:{
                 ...User.resolvers.mutations
