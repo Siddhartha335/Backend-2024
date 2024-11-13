@@ -7,9 +7,11 @@ async function init() {
     const result  = await redis.smembers('ip')
 
     const checkMember = await redis.sismember('ip', '127.0.0.1')
+    const checkCardinality = await redis.scard('ip')
 
     console.log(`Result -> ${result}`)
     console.log(checkMember)
+    console.log(checkCardinality)
 
 }
 
