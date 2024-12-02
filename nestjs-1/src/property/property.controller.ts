@@ -1,67 +1,57 @@
-import { Body, Controller, Get, HttpCode, Param, ParseBoolPipe, ParseIntPipe, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, ParseBoolPipe, ParseIntPipe, Patch, Post, Query, Response, UsePipes, Headers,  ValidationPipe, Delete } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/createProperty.dto';
 import { IdParamDto } from './dto/idParam.dto';
 import { QueryParamDto } from './dto/queryParam.dto';
 import { ParseIdPipe } from './pipes/parseIdPipe';
 import { ZodValidationPipe } from './pipes/zodValidationPipe';
 import { createPropertySchema, CreatePropertyZodDto } from './dto/createPropertyZod.dto';
+import { HeadersDto } from './dto/headers.dto';
+import { RequestHeader } from './pipes/request-header';
+import { PropertyService } from './property.service';
 
-interface Data {
-    id:number,
-    name:string,
-    location?:string
-    type?:string
-}
-
-let data:Data[] = [
-    {
-      "id": 1,
-      "name": "Thecho property",
-      "location": "Thecho, Kathmandu"
-    },
-    {
-      "id": 2,
-      "name": "London property",
-      "location": "London, UK"
-    },
-    {
-      "id": 3,
-      "name": "New York property"
-    }
-  ];;
 
 @Controller('property')
 export class PropertyController {
+
+  constructor( private propertyservice:PropertyService) {}
     @Get()
-    findAll(): Data[] {
-        return data 
+    findAll() {
+        return this.propertyservice.findAll()
     }
 
     @Get(":id")
-    findOne(@Param("id", ParseIntPipe)id, @Query("search", ParseBoolPipe) query) {
-        const data = this.findAll();
-        console.log(typeof id,typeof query);
-        const specificData =data.filter((item) => item.id == id);
-        return specificData;
+    findOne(@Param("id", ParseIntPipe)id) {
+        return this.propertyservice.findOne(id)
     }
 
     //using zod validation
     @Post()
     @HttpCode(201)
-    // @UsePipes( new ValidationPipe({
-    //     whitelist: true,
-    // forbidNonWhitelisted: true,}))
     @UsePipes(new ZodValidationPipe(createPropertySchema))
     create(@Body() body:CreatePropertyZodDto) {
-        // data.push(body);   
-        return body
+        return this.propertyservice.create(body)
     }
 
+    
+    // update(@Body(new ValidationPipe({
+    //     whitelist: true,
+    //     forbidNonWhitelisted: true,
+    //     groups: ["update"],
+    //     always: true
+    // })) body:CreatePropertyDto, @Param("id",ParseIdPipe) id,@RequestHeader(new ValidationPipe({
+    //   validateCustomDecorators: true
+    // })) header:HeadersDto) {
+    //     return this.propertyservice.update()
+    // }
     @Patch(":id")
-    update(@Body() body:CreatePropertyDto, @Param("id",ParseIdPipe) id ,@Query() query:QueryParamDto) {
-        return body
+    update(@Body() body, @Param("id",ParseIdPipe) id) {
+        return this.propertyservice.update(id,body)
     }
 
+    @Delete(":id")
+    delete(@Param("id",ParseIdPipe) id) {
+        return this.propertyservice.delete(id)
+    }
 
 }
 
